@@ -38,24 +38,37 @@
 
 namespace vrpn_ros2 {
 
+/**
+ * @brief a ROS2 node for tracking a single object in a VRPN network
+ */
 class Tracker : public rclcpp::Node {
  public:
   RCLCPP_SMART_PTR_DEFINITIONS(Tracker)
 
+  /**
+   * @brief constructor
+   *
+   * @param tracker_name name of the object to track
+   */
   Tracker(const std::string& tracker_name);
+
+  /**
+   * @brief destructor
+   */
   ~Tracker();
 
  protected:
   /**
-   * @brief tracker creation from VRPNClient
+   * @brief single object tracker created only from Client
    *
    * @param base_node VRPNClient node
    * @param name tracker name
    * @param connection vrpn connection pointer (looked up from tracker name if nullptr)
+   * @see vrpn_ros2::Client
    */
   Tracker(const rclcpp::Node& base_node,
           const std::string& tracker_name,
-          const std::shared_ptr<vrpn_Connection>& connection);
+          const std::shared_ptr<vrpn_Connection>& connection = nullptr);
 
  private:
   template <typename MsgT>

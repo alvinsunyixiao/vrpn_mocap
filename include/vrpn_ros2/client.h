@@ -35,6 +35,11 @@ namespace vrpn_ros2 {
 
 class Client : public rclcpp::Node {
  public:
+  /**
+   * @brief constructor
+   *
+   * @param name name of this VRPN Client node
+   */
   Client(const std::string& name);
 
  private:
