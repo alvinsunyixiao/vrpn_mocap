@@ -1,0 +1,120 @@
+/*******************************************************************************
+ * MIT License
+ *
+ * Copyright (c) 2022 Alvin Sun
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *******************************************************************************/
+
+#pragma once
+
+#include <memory>
+#include <string>
+#include <vector>
+
+#include <vrpn_Tracker.h>
+#include <vrpn_Connection.h>
+
+#include <rclcpp/rclcpp.hpp>
+#include <geometry_msgs/msg/accel_stamped.hpp>
+#include <geometry_msgs/msg/pose_stamped.hpp>
+#include <geometry_msgs/msg/twist_stamped.hpp>
+
+namespace vrpn_ros2 {
+
+class Tracker : public rclcpp::Node {
+ public:
+  RCLCPP_SMART_PTR_DEFINITIONS(Tracker)
+
+  Tracker(const std::string& name);
+  ~Tracker();
+
+ protected:
+  /**
+   * @brief tracker creation from VRPNClient
+   *
+   * @param base_node VRPNClient node
+   * @param name tracker name
+   * @param connection vrpn connection pointer (looked up from tracker name if nullptr)
+   */
+  Tracker(const rclcpp::Node& base_node,
+          const std::string& name,
+          const std::shared_ptr<vrpn_Connection>& connection);
+
+ private:
+  template <typename MsgT>
+  using PublisherT = rclcpp::Publisher<MsgT>;
+
+  template <typename ... Args>
+  static Tracker::SharedPtr private_make_shared(Args && ... args) {
+    class TrackerDerived : public Tracker {
+     public:
+      TrackerDerived(Args && ... args) : Tracker(std::forward<Args>(args) ...) {}
+    };
+
+    return std::make_shared<TrackerDerived>(std::forward<Args>(args) ...);
+  }
+
+  void Init();
+
+  void MainLoop();
+
+  vrpn_Tracker_Remote vrpn_tracker_;
+
+  std::vector<PublisherT<geometry_msgs::msg::PoseStamped>::SharedPtr> pose_pubs_;
+  std::vector<PublisherT<geometry_msgs::msg::TwistStamped>::SharedPtr> twist_pubs_;
+  std::vector<PublisherT<geometry_msgs::msg::AccelStamped>::SharedPtr> accel_pubs_;
+
+  rclcpp::TimerBase::SharedPtr timer_;
+
+  const std::string name_;
+  const bool multi_sensor_;
+  const std::string frame_id_;
+  const std::shared_ptr<vrpn_Connection> connection_;
+
+  template<typename MsgT>
+  typename PublisherT<MsgT>::SharedPtr GetOrCreatePublisher(
+      const size_t& sensor_idx,
+      const std::string& channel,
+      std::vector<typename PublisherT<MsgT>::SharedPtr>* pubs) {
+    // expand publisher array size if needed
+    if (pubs->size() <= sensor_idx) {
+      pubs->resize(sensor_idx + 1);
+    }
+
+    // create publisher if needed
+    const std::string sensor_channel = multi_sensor_ ?
+                                       channel + std::to_string(sensor_idx) : channel;
+    if (!pubs->at(sensor_idx)) {
+      pubs->at(sensor_idx) = this->create_publisher<MsgT>(sensor_channel, 10);
+      RCLCPP_INFO_STREAM(this->get_logger(), "Creating sensor " << sensor_idx);
+    }
+
+    return pubs->at(sensor_idx);
+  }
+
+  static void VRPN_CALLBACK HandlePose(void* tracker, const vrpn_TRACKERCB tracker_pose);
+  static void VRPN_CALLBACK HandleTwist(void* tracker, const vrpn_TRACKERVELCB tracker_vel);
+  static void VRPN_CALLBACK HandleAccel(void* tracker, const vrpn_TRACKERACCCB tracker_acc);
+
+  friend class Client;
+};
+
+} // namespace vrpn_ros2
+
