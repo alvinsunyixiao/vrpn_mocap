@@ -2,28 +2,22 @@ launch:
 
 - arg:
     name: "server"
+    default: "localhost"
 - arg:
     name: "port"
     default: "3883"
 
 - node:
     pkg: "vrpn_ros2"
+    namespace: "vrpn_ros2"
     exec: "client_node"
     name: "client_node"
-    namespace: "vrpn_ros2"
     param:
+    -
+      from: "$(find-pkg-share vrpn_ros2)/config/client.yaml"
     -
       name: "server"
       value: "$(var server)"
     -
       name: "port"
       value: "$(var port)"
-    -
-      name: "frame_id"
-      value: "world"
-    -
-      name: "update_freq"
-      value: 100.
-    -
-      name: "refresh_freq"
-      value: 1.

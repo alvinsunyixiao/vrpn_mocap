@@ -54,7 +54,7 @@ class Tracker : public rclcpp::Node {
    * @param connection vrpn connection pointer (looked up from tracker name if nullptr)
    */
   Tracker(const rclcpp::Node& base_node,
-          const std::string& name,
+          const std::string& tracker_name,
           const std::shared_ptr<vrpn_Connection>& connection);
 
  private:
@@ -75,6 +75,11 @@ class Tracker : public rclcpp::Node {
 
   void MainLoop();
 
+  const std::string name_;
+  const bool multi_sensor_;
+  const std::string frame_id_;
+  const std::shared_ptr<vrpn_Connection> connection_;
+
   vrpn_Tracker_Remote vrpn_tracker_;
 
   std::vector<PublisherT<geometry_msgs::msg::PoseStamped>::SharedPtr> pose_pubs_;
@@ -82,11 +87,6 @@ class Tracker : public rclcpp::Node {
   std::vector<PublisherT<geometry_msgs::msg::AccelStamped>::SharedPtr> accel_pubs_;
 
   rclcpp::TimerBase::SharedPtr timer_;
-
-  const std::string name_;
-  const bool multi_sensor_;
-  const std::string frame_id_;
-  const std::shared_ptr<vrpn_Connection> connection_;
 
   template<typename MsgT>
   typename PublisherT<MsgT>::SharedPtr GetOrCreatePublisher(
