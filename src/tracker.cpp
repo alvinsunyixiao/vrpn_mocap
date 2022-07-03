@@ -34,9 +34,9 @@ namespace vrpn_ros2 {
 using namespace geometry_msgs::msg;
 using namespace std::chrono_literals;
 
-Tracker::Tracker(const std::string& name)
-    : Node(name),
-      name_(declare_parameter("tracker_name", "")),
+Tracker::Tracker(const std::string& tracker_name)
+    : Node(tracker_name),
+      name_(tracker_name),
       multi_sensor_(declare_parameter("multi_sensor", false)),
       frame_id_(declare_parameter("frame_id", "world")),
       vrpn_tracker_(name_.c_str()) {

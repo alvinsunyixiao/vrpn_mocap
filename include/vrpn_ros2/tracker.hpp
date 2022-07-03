@@ -42,7 +42,7 @@ class Tracker : public rclcpp::Node {
  public:
   RCLCPP_SMART_PTR_DEFINITIONS(Tracker)
 
-  Tracker(const std::string& name);
+  Tracker(const std::string& tracker_name);
   ~Tracker();
 
  protected:
