@@ -22,12 +22,12 @@
  * SOFTWARE.
  *******************************************************************************/
 
-#include "vrpn_ros2/client.h"
+#include "vrpn_mocap/client.h"
 
 #include <chrono>
 #include <unordered_set>
 
-namespace vrpn_ros2 {
+namespace vrpn_mocap {
 
 using namespace std::chrono_literals;
 
@@ -77,4 +77,4 @@ void Client::MainLoop() {
   }
 }
 
-} // namespace vrpn_ros2
+} // namespace vrpn_mocap

@@ -1,4 +1,4 @@
-/vrpn_ros2/client_node:
+/vrpn_mocap/client_node:
   ros__parameters:
     server: localhost
     port: 3883

@@ -22,14 +22,14 @@
  * SOFTWARE.
  *******************************************************************************/
 
-#include "vrpn_ros2/tracker.hpp"
+#include "vrpn_mocap/tracker.hpp"
 
 #include <chrono>
 #include <functional>
 
 #include <Eigen/Geometry>
 
-namespace vrpn_ros2 {
+namespace vrpn_mocap {
 
 using namespace geometry_msgs::msg;
 using namespace std::chrono_literals;
@@ -157,4 +157,4 @@ void VRPN_CALLBACK Tracker::HandleAccel(void* data, const vrpn_TRACKERACCCB trac
   pub->publish(msg);
 }
 
-} // namespace vrpn_ros2
+} // namespace vrpn_mocap

@@ -36,7 +36,7 @@
 #include <geometry_msgs/msg/pose_stamped.hpp>
 #include <geometry_msgs/msg/twist_stamped.hpp>
 
-namespace vrpn_ros2 {
+namespace vrpn_mocap {
 
 /**
  * @brief a ROS2 node for tracking a single object in a VRPN network
@@ -64,7 +64,7 @@ class Tracker : public rclcpp::Node {
    * @param base_node VRPNClient node
    * @param name tracker name
    * @param connection vrpn connection pointer (looked up from tracker name if nullptr)
-   * @see vrpn_ros2::Client
+   * @see vrpn_mocap::Client
    */
   Tracker(const rclcpp::Node& base_node,
           const std::string& tracker_name,
@@ -129,5 +129,5 @@ class Tracker : public rclcpp::Node {
   friend class Client;
 };
 
-} // namespace vrpn_ros2
+} // namespace vrpn_mocap
 

@@ -26,11 +26,11 @@
 
 #include <rclcpp/rclcpp.hpp>
 
-#include "vrpn_ros2/client.h"
+#include "vrpn_mocap/client.h"
 
 int main(int argc, char* argv[]) {
   rclcpp::init(argc, argv);
-  rclcpp::spin(std::make_shared<vrpn_ros2::Client>("vrpn_ros2_client"));
+  rclcpp::spin(std::make_shared<vrpn_mocap::Client>("client"));
   rclcpp::shutdown();
   return 0;
 }

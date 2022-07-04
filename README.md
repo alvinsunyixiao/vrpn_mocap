@@ -29,9 +29,9 @@ ros2 launch client.launch.yaml server:=192.168.0.4 port:=3883
 ```
 Then with `ros2 topic list`, you should be able to see the following topics
 ```bash
-/vrpn_ros2/client_node/<tracker_name>/pose
-/vrpn_ros2/client_node/<tracker_name>/twist # optional when mocap reports velocity data
-/vrpn_ros2/client_node/<tracker_name>/accel # optional when mocap reports acceleration data
+/vrpn_mocap/client_node/<tracker_name>/pose
+/vrpn_mocap/client_node/<tracker_name>/twist # optional when mocap reports velocity data
+/vrpn_mocap/client_node/<tracker_name>/accel # optional when mocap reports acceleration data
 ```
 where `<tracker_name>` is usually the name of your tracked objects.
 

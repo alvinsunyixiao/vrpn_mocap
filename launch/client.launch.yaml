@@ -8,13 +8,13 @@ launch:
     default: "3883"
 
 - node:
-    pkg: "vrpn_ros2"
-    namespace: "vrpn_ros2"
+    pkg: "vrpn_mocap"
+    namespace: "vrpn_mocap"
     exec: "client_node"
     name: "client_node"
     param:
     -
-      from: "$(find-pkg-share vrpn_ros2)/config/client.yaml"
+      from: "$(find-pkg-share vrpn_mocap)/config/client.yaml"
     -
       name: "server"
       value: "$(var server)"

@@ -29,9 +29,9 @@
 
 #include <rclcpp/rclcpp.hpp>
 
-#include "vrpn_ros2/tracker.hpp"
+#include "vrpn_mocap/tracker.hpp"
 
-namespace vrpn_ros2 {
+namespace vrpn_mocap {
 
 class Client : public rclcpp::Node {
  public:
@@ -58,5 +58,5 @@ class Client : public rclcpp::Node {
   const std::shared_ptr<vrpn_Connection> connection_;
 };
 
-} // namespace vrpn_ros2
+} // namespace vrpn_mocap
 
