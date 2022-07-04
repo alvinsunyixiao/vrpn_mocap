@@ -1,4 +1,4 @@
-# vrpn\_ros2
+# vrpn\_mocap
 
 ROS2 [VRPN](https://github.com/vrpn/vrpn) client built pirmarily to interface
 with motion capture devices such as VICON and OptiTrack. A detailed list of
@@ -39,6 +39,15 @@ where `<tracker_name>` is usually the name of your tracked objects.
 Check out the default [parameter file](config/client.yaml) and
 [launch file](launch/client.launch.yaml). You can then write your own launch
 file with custom configurations.
+
+#### Parameters
+- `server (string)` -- server name, either ip address or domain name (default: `"localhost"`)
+- `port (int)` -- VRPN server port (default: `3883`)
+- `frame_id (string)` -- frame name of the fixed world frame (default: `"world"`)
+- `update_freq (double)` -- frequency of the motion capture data publisher (default: `100.`)
+- `refresh_freq (double)` -- frequency of dynamic adding new tracked objects (default: `1.`)
+- `multi_sensor (bool)` -- set to true if there are more than one sensor (frame) reporting on
+  the same object (default: `false`)
 
 ### Acknowledgement
 Some ideas are borrowed from the well known
