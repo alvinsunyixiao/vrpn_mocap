@@ -88,6 +88,8 @@ class Tracker : public rclcpp::Node {
 
   void MainLoop();
 
+  std::string ValidNodeName(const std::string& name);
+
   const std::string name_;
   const bool multi_sensor_;
   const std::string frame_id_;
