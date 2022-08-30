@@ -2,8 +2,8 @@
 Changelog for package vrpn_mocap
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.3 (2022-08-30)
+------------------
 * fix header typo
 * Contributors: Alvin Sun
 
