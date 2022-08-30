@@ -2,8 +2,8 @@
 Changelog for package vrpn_mocap
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.1 (2022-08-30)
+------------------
 * Fix lint errors
 * Contributors: Alvin Sun
 
