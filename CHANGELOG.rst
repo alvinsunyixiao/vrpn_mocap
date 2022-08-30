@@ -2,6 +2,11 @@
 Changelog for package vrpn_mocap
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* fix include order to work with both rolling and foxy
+* Contributors: Alvin Sun
+
 1.0.1 (2022-08-30)
 ------------------
 * Fix lint errors
