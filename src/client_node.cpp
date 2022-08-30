@@ -23,7 +23,7 @@
 #include <cstdio>
 #include <memory>
 
-#include "rclpp/rclcpp.hpp"
+#include "rclcpp/rclcpp.hpp"
 #include "vrpn_mocap/client.hpp"
 
 int main(int argc, char * argv[])
