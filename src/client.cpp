@@ -23,6 +23,7 @@
 #include "vrpn_mocap/client.hpp"
 
 #include <chrono>
+#include <string>
 #include <unordered_set>
 
 namespace vrpn_mocap

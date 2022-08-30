@@ -20,17 +20,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#pragma once
-
-#include <vrpn_Connection.h>
-#include <vrpn_Tracker.h>
+#ifndef VRPN_MOCAP__TRACKER_HPP_
+#define VRPN_MOCAP__TRACKER_HPP_
 
 #include <geometry_msgs/msg/accel_stamped.hpp>
 #include <geometry_msgs/msg/pose_stamped.hpp>
 #include <geometry_msgs/msg/twist_stamped.hpp>
-#include <memory>
 #include <rclcpp/rclcpp.hpp>
+
+#include <vrpn_Connection.h>
+#include <vrpn_Tracker.h>
+
+#include <memory>
 #include <string>
+#include <utility>
 #include <vector>
 
 namespace vrpn_mocap
@@ -49,7 +52,7 @@ public:
    *
    * @param tracker_name name of the object to track
    */
-  Tracker(const std::string & tracker_name);
+  explicit Tracker(const std::string & tracker_name);
 
   /**
    * @brief destructor
@@ -79,7 +82,7 @@ private:
     class TrackerDerived : public Tracker
     {
 public:
-      TrackerDerived(Args && ... args)
+      explicit TrackerDerived(Args && ... args)
       : Tracker(std::forward<Args>(args)...) {}
     };
 
@@ -134,3 +137,5 @@ public:
 };
 
 }  // namespace vrpn_mocap
+
+#endif  // VRPN_MOCAP__TRACKER_HPP_

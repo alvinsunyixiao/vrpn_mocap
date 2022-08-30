@@ -20,9 +20,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#pragma once
+#ifndef VRPN_MOCAP__CLIENT_HPP_
+#define VRPN_MOCAP__CLIENT_HPP_
 
 #include <rclcpp/rclcpp.hpp>
+
+#include <memory>
 #include <string>
 #include <unordered_map>
 
@@ -39,7 +42,7 @@ public:
    *
    * @param name name of this VRPN Client node
    */
-  Client(const std::string & name);
+  explicit Client(const std::string & name);
 
 private:
   std::string ParseHost();
@@ -58,3 +61,5 @@ private:
 };
 
 }  // namespace vrpn_mocap
+
+#endif  // VRPN_MOCAP__CLIENT_HPP_

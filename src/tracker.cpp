@@ -25,12 +25,16 @@
 #include <Eigen/Geometry>
 #include <chrono>
 #include <functional>
+#include <memory>
 #include <regex>
+#include <string>
 
 namespace vrpn_mocap
 {
 
-using namespace geometry_msgs::msg;
+using geometry_msgs::msg::AccelStamped;
+using geometry_msgs::msg::PoseStamped;
+using geometry_msgs::msg::TwistStamped;
 using namespace std::chrono_literals;
 
 std::string Tracker::ValidNodeName(const std::string & tracker_name)
