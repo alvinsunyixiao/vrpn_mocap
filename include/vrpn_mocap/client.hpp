@@ -23,12 +23,11 @@
 #ifndef VRPN_MOCAP__CLIENT_HPP_
 #define VRPN_MOCAP__CLIENT_HPP_
 
-#include <rclcpp/rclcpp.hpp>
-
 #include <memory>
 #include <string>
 #include <unordered_map>
 
+#include "rclcpp/rclcpp.hpp"
 #include "vrpn_mocap/tracker.hpp"
 
 namespace vrpn_mocap
