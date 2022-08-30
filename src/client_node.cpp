@@ -24,7 +24,7 @@
 
 #include <rclcpp/rclcpp.hpp>
 
-#include "vrpn_mocap/client.h"
+#include "vrpn_mocap/client.hpp"
 
 int main(int argc, char* argv[]) {
   rclcpp::init(argc, argv);

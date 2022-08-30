@@ -20,7 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include "vrpn_mocap/client.h"
+#include "vrpn_mocap/client.hpp"
 
 #include <chrono>
 #include <unordered_set>
