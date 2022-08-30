@@ -2,6 +2,11 @@
 Changelog for package vrpn_mocap
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* fix header typo
+* Contributors: Alvin Sun
+
 1.0.2 (2022-08-30)
 ------------------
 * fix include order to work with both rolling and foxy
