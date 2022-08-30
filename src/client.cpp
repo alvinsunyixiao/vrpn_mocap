@@ -25,27 +25,29 @@
 #include <chrono>
 #include <unordered_set>
 
-namespace vrpn_mocap {
+namespace vrpn_mocap
+{
 
 using namespace std::chrono_literals;
 
 const std::unordered_set<std::string> tracker_name_blacklist_({"VRPN Control"});
 
-Client::Client(const std::string& name)
-    : Node(name),
-      frame_id_(declare_parameter("frame_id", "world")),
-      connection_(vrpn_get_connection_by_name(ParseHost().c_str())) {
-
+Client::Client(const std::string & name)
+: Node(name),
+  frame_id_(declare_parameter("frame_id", "world")),
+  connection_(vrpn_get_connection_by_name(ParseHost().c_str()))
+{
   this->declare_parameter("multi_sensor", false);
   const double refresh_freq = this->declare_parameter("refresh_freq", 1.);
-  refresh_timer_ = this->create_wall_timer(1s / refresh_freq,
-                                           std::bind(&Client::RefreshConnection, this));
+  refresh_timer_ =
+    this->create_wall_timer(1s / refresh_freq, std::bind(&Client::RefreshConnection, this));
 
   const double update_freq = this->declare_parameter("update_freq", 100.);
   mainloop_timer_ = this->create_wall_timer(1s / update_freq, std::bind(&Client::MainLoop, this));
 }
 
-std::string Client::ParseHost() {
+std::string Client::ParseHost()
+{
   const std::string server = this->declare_parameter("server", "");
   const int port = this->declare_parameter("port", 0);
   if (server.empty() || port == 0) {
@@ -55,7 +57,8 @@ std::string Client::ParseHost() {
   return server + ":" + std::to_string(port);
 }
 
-void Client::RefreshConnection() {
+void Client::RefreshConnection()
+{
   for (int i = 0; connection_->sender_name(i); i++) {
     const std::string tracker_name = connection_->sender_name(i);
     if (trackers_.count(tracker_name) == 0 && tracker_name_blacklist_.count(tracker_name) == 0) {
@@ -64,16 +67,17 @@ void Client::RefreshConnection() {
   }
 }
 
-void Client::MainLoop() {
+void Client::MainLoop()
+{
   connection_->mainloop();
 
   if (!connection_->doing_okay()) {
     RCLCPP_WARN(this->get_logger(), "VRPN connection is bad");
   }
 
-  for (const auto& tracker: trackers_) {
+  for (const auto & tracker : trackers_) {
     tracker.second->MainLoop();
   }
 }
 
-} // namespace vrpn_mocap
+}  // namespace vrpn_mocap

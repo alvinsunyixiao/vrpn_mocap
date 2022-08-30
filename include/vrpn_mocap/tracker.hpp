@@ -22,25 +22,26 @@
 
 #pragma once
 
-#include <memory>
-#include <string>
-#include <vector>
-
-#include <vrpn_Tracker.h>
 #include <vrpn_Connection.h>
+#include <vrpn_Tracker.h>
 
-#include <rclcpp/rclcpp.hpp>
 #include <geometry_msgs/msg/accel_stamped.hpp>
 #include <geometry_msgs/msg/pose_stamped.hpp>
 #include <geometry_msgs/msg/twist_stamped.hpp>
+#include <memory>
+#include <rclcpp/rclcpp.hpp>
+#include <string>
+#include <vector>
 
-namespace vrpn_mocap {
+namespace vrpn_mocap
+{
 
 /**
  * @brief a ROS2 node for tracking a single object in a VRPN network
  */
-class Tracker : public rclcpp::Node {
- public:
+class Tracker : public rclcpp::Node
+{
+public:
   RCLCPP_SMART_PTR_DEFINITIONS(Tracker)
 
   /**
@@ -48,14 +49,14 @@ class Tracker : public rclcpp::Node {
    *
    * @param tracker_name name of the object to track
    */
-  Tracker(const std::string& tracker_name);
+  Tracker(const std::string & tracker_name);
 
   /**
    * @brief destructor
    */
   ~Tracker();
 
- protected:
+protected:
   /**
    * @brief single object tracker created only from Client
    *
@@ -64,29 +65,32 @@ class Tracker : public rclcpp::Node {
    * @param connection vrpn connection pointer (looked up from tracker name if nullptr)
    * @see vrpn_mocap::Client
    */
-  Tracker(const rclcpp::Node& base_node,
-          const std::string& tracker_name,
-          const std::shared_ptr<vrpn_Connection>& connection = nullptr);
+  Tracker(
+    const rclcpp::Node & base_node, const std::string & tracker_name,
+    const std::shared_ptr<vrpn_Connection> & connection = nullptr);
 
- private:
-  template <typename MsgT>
+private:
+  template<typename MsgT>
   using PublisherT = rclcpp::Publisher<MsgT>;
 
-  template <typename ... Args>
-  static Tracker::SharedPtr private_make_shared(Args && ... args) {
-    class TrackerDerived : public Tracker {
-     public:
-      TrackerDerived(Args && ... args) : Tracker(std::forward<Args>(args) ...) {}
+  template<typename ... Args>
+  static Tracker::SharedPtr private_make_shared(Args && ... args)
+  {
+    class TrackerDerived : public Tracker
+    {
+public:
+      TrackerDerived(Args && ... args)
+      : Tracker(std::forward<Args>(args)...) {}
     };
 
-    return std::make_shared<TrackerDerived>(std::forward<Args>(args) ...);
+    return std::make_shared<TrackerDerived>(std::forward<Args>(args)...);
   }
 
   void Init();
 
   void MainLoop();
 
-  std::string ValidNodeName(const std::string& name);
+  std::string ValidNodeName(const std::string & name);
 
   const std::string name_;
   const bool multi_sensor_;
@@ -103,17 +107,17 @@ class Tracker : public rclcpp::Node {
 
   template<typename MsgT>
   typename PublisherT<MsgT>::SharedPtr GetOrCreatePublisher(
-      const size_t& sensor_idx,
-      const std::string& channel,
-      std::vector<typename PublisherT<MsgT>::SharedPtr>* pubs) {
+    const size_t & sensor_idx, const std::string & channel,
+    std::vector<typename PublisherT<MsgT>::SharedPtr> * pubs)
+  {
     // expand publisher array size if needed
     if (pubs->size() <= sensor_idx) {
       pubs->resize(sensor_idx + 1);
     }
 
     // create publisher if needed
-    const std::string sensor_channel = multi_sensor_ ?
-                                       channel + std::to_string(sensor_idx) : channel;
+    const std::string sensor_channel =
+      multi_sensor_ ? channel + std::to_string(sensor_idx) : channel;
     if (!pubs->at(sensor_idx)) {
       pubs->at(sensor_idx) = this->create_publisher<MsgT>(sensor_channel, 10);
       RCLCPP_INFO_STREAM(this->get_logger(), "Creating sensor " << sensor_idx);
@@ -122,12 +126,11 @@ class Tracker : public rclcpp::Node {
     return pubs->at(sensor_idx);
   }
 
-  static void VRPN_CALLBACK HandlePose(void* tracker, const vrpn_TRACKERCB tracker_pose);
-  static void VRPN_CALLBACK HandleTwist(void* tracker, const vrpn_TRACKERVELCB tracker_vel);
-  static void VRPN_CALLBACK HandleAccel(void* tracker, const vrpn_TRACKERACCCB tracker_acc);
+  static void VRPN_CALLBACK HandlePose(void * tracker, const vrpn_TRACKERCB tracker_pose);
+  static void VRPN_CALLBACK HandleTwist(void * tracker, const vrpn_TRACKERVELCB tracker_vel);
+  static void VRPN_CALLBACK HandleAccel(void * tracker, const vrpn_TRACKERACCCB tracker_acc);
 
   friend class Client;
 };
 
-} // namespace vrpn_mocap
-
+}  // namespace vrpn_mocap

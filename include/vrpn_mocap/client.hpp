@@ -22,25 +22,26 @@
 
 #pragma once
 
+#include <rclcpp/rclcpp.hpp>
 #include <string>
 #include <unordered_map>
 
-#include <rclcpp/rclcpp.hpp>
-
 #include "vrpn_mocap/tracker.hpp"
 
-namespace vrpn_mocap {
+namespace vrpn_mocap
+{
 
-class Client : public rclcpp::Node {
- public:
+class Client : public rclcpp::Node
+{
+public:
   /**
    * @brief constructor
    *
    * @param name name of this VRPN Client node
    */
-  Client(const std::string& name);
+  Client(const std::string & name);
 
- private:
+private:
   std::string ParseHost();
 
   void RefreshConnection();
@@ -56,5 +57,4 @@ class Client : public rclcpp::Node {
   const std::shared_ptr<vrpn_Connection> connection_;
 };
 
-} // namespace vrpn_mocap
-
+}  // namespace vrpn_mocap
