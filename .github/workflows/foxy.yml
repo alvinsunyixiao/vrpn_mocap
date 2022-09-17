@@ -20,5 +20,5 @@ jobs:
       - name: ROS2 build and test
         uses: ros-tooling/action-ros-ci@v0.2
         with:
-          package-name: asl_flight2
+          package-name: vrpn_mocap
           target-ros2-distro: foxy
