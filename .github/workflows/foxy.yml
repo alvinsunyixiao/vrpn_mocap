@@ -1,0 +1,24 @@
+name: foxy build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: setup ROS2
+        uses: ros-tooling/setup-ros@v0.4
+        with:
+          use-ros2-testing: true  # remove this once vrpn package goes into foxy index
+          required-ros-distributions: foxy
+      - name: ROS2 build and test
+        uses: ros-tooling/action-ros-ci@v0.2
+        with:
+          package-name: asl_flight2
+          target-ros2-distro: foxy
