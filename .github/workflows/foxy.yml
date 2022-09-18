@@ -12,6 +12,10 @@ jobs:
   build:
     runs-on: ubuntu-20.04
     steps:
+      - name: cancle preivious run
+        uses: styfle/cancel-workflow-action@0.10.0
+        with:
+          access_token: ${{ github.token }}
       # downgrade cmake necessary because of https://github.com/vrpn/vrpn/pull/276
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v1.12
