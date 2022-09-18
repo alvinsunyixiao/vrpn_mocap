@@ -105,7 +105,7 @@ void VRPN_CALLBACK Tracker::HandlePose(void * data, const vrpn_TRACKERCB tracker
   // populate message
   PoseStamped msg;
   msg.header.frame_id = tracker->frame_id_;
-  msg.header.stamp = rclcpp::Clock().now();
+  msg.header.stamp = tracker->get_clock()->now();
 
   msg.pose.position.x = tracker_pose.pos[0];
   msg.pose.position.y = tracker_pose.pos[1];
@@ -130,7 +130,7 @@ void VRPN_CALLBACK Tracker::HandleTwist(void * data, const vrpn_TRACKERVELCB tra
   // populate message
   TwistStamped msg;
   msg.header.frame_id = tracker->frame_id_;
-  msg.header.stamp = rclcpp::Clock().now();
+  msg.header.stamp = tracker->get_clock()->now();
 
   msg.twist.linear.x = tracker_twist.vel[0];
   msg.twist.linear.y = tracker_twist.vel[1];
@@ -159,7 +159,7 @@ void VRPN_CALLBACK Tracker::HandleAccel(void * data, const vrpn_TRACKERACCCB tra
   // populate message
   AccelStamped msg;
   msg.header.frame_id = tracker->frame_id_;
-  msg.header.stamp = rclcpp::Clock().now();
+  msg.header.stamp = tracker->get_clock()->now();
 
   msg.accel.linear.x = tracker_accel.acc[0];
   msg.accel.linear.y = tracker_accel.acc[1];
