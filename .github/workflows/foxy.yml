@@ -1,0 +1,29 @@
+name: foxy build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      # downgrade cmake necessary because of https://github.com/vrpn/vrpn/pull/276
+      - name: Setup cmake
+        uses: jwlawson/actions-setup-cmake@v1.12
+        with:
+          cmake-version: '3.16.x'
+      - name: setup ROS2
+        uses: ros-tooling/setup-ros@v0.4
+        with:
+          use-ros2-testing: true  # remove this once vrpn package goes into foxy index
+          required-ros-distributions: foxy
+      - name: ROS2 build and test
+        uses: ros-tooling/action-ros-ci@v0.2
+        with:
+          package-name: vrpn_mocap
+          target-ros2-distro: foxy

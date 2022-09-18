@@ -1,0 +1,28 @@
+name: rolling build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      # downgrade cmake necessary because of https://github.com/vrpn/vrpn/pull/276
+      - name: Setup cmake
+        uses: jwlawson/actions-setup-cmake@v1.12
+        with:
+          cmake-version: '3.22.x'
+      - name: setup ROS2
+        uses: ros-tooling/setup-ros@v0.4
+        with:
+          required-ros-distributions: rolling
+      - name: ROS2 build and test
+        uses: ros-tooling/action-ros-ci@v0.2
+        with:
+          package-name: vrpn_mocap
+          target-ros2-distro: rolling
