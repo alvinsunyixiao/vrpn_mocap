@@ -2,8 +2,8 @@
 Changelog for package vrpn_mocap
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.4 (2023-04-25)
+------------------
 * fix readme
 * use node clock (`#3 <https://github.com/alvinsunyixiao/vrpn_mocap/issues/3>`_)
 * cancel ci run on previous push (`#2 <https://github.com/alvinsunyixiao/vrpn_mocap/issues/2>`_)
