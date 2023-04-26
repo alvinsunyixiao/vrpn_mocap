@@ -2,6 +2,19 @@
 Changelog for package vrpn_mocap
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* fix readme
+* use node clock (`#3 <https://github.com/alvinsunyixiao/vrpn_mocap/issues/3>`_)
+* cancel ci run on previous push (`#2 <https://github.com/alvinsunyixiao/vrpn_mocap/issues/2>`_)
+* add foxy ci (`#1 <https://github.com/alvinsunyixiao/vrpn_mocap/issues/1>`_)
+  * add foxy ci
+  * fix package name
+  * revert cmake
+  * downgrade cmake in CI
+  * add rolling and humble CI and badages
+* Contributors: Alvin Sun
+
 1.0.3 (2022-08-30)
 ------------------
 * fix header typo
