@@ -11,7 +11,7 @@ launch:
     pkg: "vrpn_mocap"
     namespace: "vrpn_mocap"
     exec: "client_node"
-    name: "client_node"
+    name: "vrpn_mocap_client_node"
     param:
     -
       from: "$(find-pkg-share vrpn_mocap)/config/client.yaml"
