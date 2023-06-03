@@ -2,6 +2,7 @@
 
 ![foxy](https://github.com/alvinsunyixiao/vrpn_mocap/actions/workflows/foxy.yml/badge.svg)
 ![humble](https://github.com/alvinsunyixiao/vrpn_mocap/actions/workflows/humble.yml/badge.svg)
+![iron](https://github.com/alvinsunyixiao/vrpn_mocap/actions/workflows/iron.yml/badge.svg)
 ![rolling](https://github.com/alvinsunyixiao/vrpn_mocap/actions/workflows/rolling.yml/badge.svg)
 
 ROS2 [VRPN](https://github.com/vrpn/vrpn) client built pirmarily to interface
@@ -12,7 +13,7 @@ supported hardware can be found on
 ## Installation
 
 #### Install From Binary Release
-- [ ] TODO
+`sudo apt install ros-<rosdistro>-vrpn-mocap`
 
 #### Build From Source
 1. Clone this repo into your ROS2 workspace
