@@ -22,11 +22,11 @@ jobs:
         with:
           cmake-version: '3.22.x'
       - name: setup ROS2
-        uses: ros-tooling/setup-ros@v0.6
+        uses: ros-tooling/setup-ros@0.6.2
         with:
           required-ros-distributions: iron
       - name: ROS2 build and test
-        uses: ros-tooling/action-ros-ci@v0.3
+        uses: ros-tooling/action-ros-ci@0.3.2
         with:
           package-name: vrpn_mocap
           target-ros2-distro: iron
