@@ -50,6 +50,8 @@ file with custom configurations.
 - `frame_id (string)` -- frame name of the fixed world frame (default: `"world"`)
 - `update_freq (double)` -- frequency of the motion capture data publisher (default: `100.`)
 - `refresh_freq (double)` -- frequency of dynamic adding new tracked objects (default: `1.`)
+- `sensor_data_qos` -- use best effort QoS for VRPN data stream, set to false to use
+  system default QoS which is reliable (default: `true`)
 - `multi_sensor (bool)` -- set to true if there are more than one sensor (frame) reporting on
   the same object (default: `false`)
 

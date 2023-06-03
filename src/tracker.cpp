@@ -52,6 +52,7 @@ Tracker::Tracker(const std::string & tracker_name)
   name_(tracker_name),
   multi_sensor_(declare_parameter("multi_sensor", false)),
   frame_id_(declare_parameter("frame_id", "world")),
+  sensor_data_qos_(declare_parameter("sensor_data_qos", true)),
   vrpn_tracker_(name_.c_str())
 {
   Init();
@@ -68,6 +69,7 @@ Tracker::Tracker(
   name_(tracker_name),
   multi_sensor_(base_node.get_parameter("multi_sensor").as_bool()),
   frame_id_(base_node.get_parameter("frame_id").as_string()),
+  sensor_data_qos_(base_node.get_parameter("sensor_data_qos").as_bool()),
   vrpn_tracker_(name_.c_str(), connection.get())
 {
   Init();
