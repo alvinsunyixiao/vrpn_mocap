@@ -2,6 +2,7 @@
 
 ![foxy](https://github.com/alvinsunyixiao/vrpn_mocap/actions/workflows/foxy.yml/badge.svg)
 ![humble](https://github.com/alvinsunyixiao/vrpn_mocap/actions/workflows/humble.yml/badge.svg)
+![iron](https://github.com/alvinsunyixiao/vrpn_mocap/actions/workflows/iron.yml/badge.svg)
 ![rolling](https://github.com/alvinsunyixiao/vrpn_mocap/actions/workflows/rolling.yml/badge.svg)
 
 ROS2 [VRPN](https://github.com/vrpn/vrpn) client built pirmarily to interface
@@ -12,7 +13,7 @@ supported hardware can be found on
 ## Installation
 
 #### Install From Binary Release
-- [ ] TODO
+`sudo apt install ros-<rosdistro>-vrpn-mocap`
 
 #### Build From Source
 1. Clone this repo into your ROS2 workspace
@@ -50,6 +51,8 @@ file with custom configurations.
 - `frame_id (string)` -- frame name of the fixed world frame (default: `"world"`)
 - `update_freq (double)` -- frequency of the motion capture data publisher (default: `100.`)
 - `refresh_freq (double)` -- frequency of dynamic adding new tracked objects (default: `1.`)
+- `sensor_data_qos` -- use best effort QoS for VRPN data stream, set to false to use
+  system default QoS which is reliable (default: `true`)
 - `multi_sensor (bool)` -- set to true if there are more than one sensor (frame) reporting on
   the same object (default: `false`)
 
