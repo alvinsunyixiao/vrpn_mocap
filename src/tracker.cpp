@@ -105,8 +105,19 @@ builtin_interfaces::msg::Time Tracker::get_timestamp(struct timeval vrpn_timesta
       this->first_vrpn_timestamp_ = vrpn_timestamp;
     }
     builtin_interfaces::msg::Time stamp;
-    stamp.sec = vrpn_timestamp.tv_sec - this->first_vrpn_timestamp_.tv_sec + this->first_ros_timestamp_.sec;
-    stamp.nanosec = (vrpn_timestamp.tv_usec - this->first_vrpn_timestamp_.tv_usec) * 1000 + this->first_ros_timestamp_.nanosec;
+    int64_t sec = vrpn_timestamp.tv_sec - this->first_vrpn_timestamp_.tv_sec + this->first_ros_timestamp_.sec;
+    int64_t nanosec = (vrpn_timestamp.tv_usec - this->first_vrpn_timestamp_.tv_usec) * 1000 + this->first_ros_timestamp_.nanosec;
+    while (nanosec < 0) {
+      nanosec += 1e9;
+      sec -= 1;
+    }
+    while (nanosec >= 1e9) {
+      nanosec -= 1e9;
+      sec += 1;
+    }
+    stamp.sec = sec;
+    stamp.nanosec = nanosec;
+
     return stamp;
   }
   return this->get_clock()->now();
