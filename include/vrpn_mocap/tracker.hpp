@@ -31,6 +31,7 @@
 #include "vrpn_Connection.h"
 #include "vrpn_Tracker.h"
 
+#include "builtin_interfaces/msg/time.hpp"
 #include "geometry_msgs/msg/accel_stamped.hpp"
 #include "geometry_msgs/msg/pose_stamped.hpp"
 #include "geometry_msgs/msg/twist_stamped.hpp"
@@ -100,7 +101,11 @@ public:
   const bool multi_sensor_;
   const std::string frame_id_;
   const bool sensor_data_qos_;
+  const bool use_vrpn_timestamps_;
   const std::shared_ptr<vrpn_Connection> connection_;
+
+  builtin_interfaces::msg::Time first_ros_timestamp_;
+  struct timeval first_vrpn_timestamp_;
 
   vrpn_Tracker_Remote vrpn_tracker_;
 
@@ -138,6 +143,8 @@ public:
 
     return pubs->at(sensor_idx);
   }
+
+  builtin_interfaces::msg::Time get_timestamp(struct timeval vrpn_timestamp);
 
   static void VRPN_CALLBACK HandlePose(void * tracker, const vrpn_TRACKERCB tracker_pose);
   static void VRPN_CALLBACK HandleTwist(void * tracker, const vrpn_TRACKERVELCB tracker_vel);
