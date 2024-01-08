@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  iron_build:
     runs-on: ubuntu-22.04
     steps:
       - name: cancle preivious run
@@ -22,11 +22,11 @@ jobs:
         with:
           cmake-version: '3.22.x'
       - name: setup ROS2
-        uses: ros-tooling/setup-ros@0.6.2
+        uses: ros-tooling/setup-ros@0.7.1
         with:
           required-ros-distributions: iron
       - name: ROS2 build and test
-        uses: ros-tooling/action-ros-ci@0.3.2
+        uses: ros-tooling/action-ros-ci@0.3.5
         with:
           package-name: vrpn_mocap
           target-ros2-distro: iron
