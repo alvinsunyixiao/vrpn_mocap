@@ -22,7 +22,7 @@ jobs:
         with:
           cmake-version: '3.22.x'
       - name: setup ROS2
-        uses: ros-tooling/setup-ros@v0.6
+        uses: ros-tooling/setup-ros@v0.7
         with:
           required-ros-distributions: rolling
       - name: ROS2 build and test
