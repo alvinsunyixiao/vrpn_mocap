@@ -104,9 +104,6 @@ public:
   const bool use_vrpn_timestamps_;
   const std::shared_ptr<vrpn_Connection> connection_;
 
-  builtin_interfaces::msg::Time first_ros_timestamp_;
-  struct timeval first_vrpn_timestamp_;
-
   vrpn_Tracker_Remote vrpn_tracker_;
 
   std::vector<PublisherT<geometry_msgs::msg::PoseStamped>::SharedPtr> pose_pubs_;

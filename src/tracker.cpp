@@ -100,23 +100,9 @@ void Tracker::MainLoop() {vrpn_tracker_.mainloop();}
 
 builtin_interfaces::msg::Time Tracker::get_timestamp(struct timeval vrpn_timestamp) {
   if (this->use_vrpn_timestamps_) {
-    if (this->first_ros_timestamp_.sec == 0) {
-      this->first_ros_timestamp_ = this->get_clock()->now();
-      this->first_vrpn_timestamp_ = vrpn_timestamp;
-    }
     builtin_interfaces::msg::Time stamp;
-    int64_t sec = vrpn_timestamp.tv_sec - this->first_vrpn_timestamp_.tv_sec + this->first_ros_timestamp_.sec;
-    int64_t nanosec = (vrpn_timestamp.tv_usec - this->first_vrpn_timestamp_.tv_usec) * 1000 + this->first_ros_timestamp_.nanosec;
-    while (nanosec < 0) {
-      nanosec += 1e9;
-      sec -= 1;
-    }
-    while (nanosec >= 1e9) {
-      nanosec -= 1e9;
-      sec += 1;
-    }
-    stamp.sec = sec;
-    stamp.nanosec = nanosec;
+    stamp.sec = vrpn_timestamp.tv_sec;
+    stamp.nanosec = vrpn_timestamp.tv_usec * 1000;
 
     return stamp;
   }
