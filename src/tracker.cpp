@@ -127,7 +127,7 @@ void VRPN_CALLBACK Tracker::HandleTwist(void * data, const vrpn_TRACKERVELCB tra
 
   // lazy initialization of publisher
   auto pub = tracker->GetOrCreatePublisher<TwistStamped>(
-    static_cast<size_t>(tracker_twist.sensor), "pose", &tracker->twist_pubs_);
+    static_cast<size_t>(tracker_twist.sensor), "twist", &tracker->twist_pubs_);
 
   // populate message
   TwistStamped msg;
