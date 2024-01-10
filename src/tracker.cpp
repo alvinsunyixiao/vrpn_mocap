@@ -98,7 +98,8 @@ void Tracker::Init()
 
 void Tracker::MainLoop() {vrpn_tracker_.mainloop();}
 
-builtin_interfaces::msg::Time Tracker::GetTimestamp(struct timeval vrpn_timestamp) {
+builtin_interfaces::msg::Time Tracker::GetTimestamp(struct timeval vrpn_timestamp)
+{
   if (this->use_vrpn_timestamps_) {
     builtin_interfaces::msg::Time stamp;
     stamp.sec = vrpn_timestamp.tv_sec;
