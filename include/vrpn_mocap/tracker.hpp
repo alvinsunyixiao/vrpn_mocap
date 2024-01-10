@@ -141,7 +141,7 @@ public:
     return pubs->at(sensor_idx);
   }
 
-  builtin_interfaces::msg::Time get_timestamp(struct timeval vrpn_timestamp);
+  builtin_interfaces::msg::Time GetTimestamp(struct timeval vrpn_timestamp);
 
   static void VRPN_CALLBACK HandlePose(void * tracker, const vrpn_TRACKERCB tracker_pose);
   static void VRPN_CALLBACK HandleTwist(void * tracker, const vrpn_TRACKERVELCB tracker_vel);
