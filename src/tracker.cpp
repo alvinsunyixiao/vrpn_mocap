@@ -53,6 +53,7 @@ Tracker::Tracker(const std::string & tracker_name)
   multi_sensor_(declare_parameter("multi_sensor", false)),
   frame_id_(declare_parameter("frame_id", "world")),
   sensor_data_qos_(declare_parameter("sensor_data_qos", true)),
+  use_vrpn_timestamps_(declare_parameter("use_vrpn_timestamps", false)),
   vrpn_tracker_(name_.c_str())
 {
   Init();
@@ -70,6 +71,7 @@ Tracker::Tracker(
   multi_sensor_(base_node.get_parameter("multi_sensor").as_bool()),
   frame_id_(base_node.get_parameter("frame_id").as_string()),
   sensor_data_qos_(base_node.get_parameter("sensor_data_qos").as_bool()),
+  use_vrpn_timestamps_(base_node.get_parameter("use_vrpn_timestamps").as_bool()),
   vrpn_tracker_(name_.c_str(), connection.get())
 {
   Init();
@@ -96,6 +98,18 @@ void Tracker::Init()
 
 void Tracker::MainLoop() {vrpn_tracker_.mainloop();}
 
+builtin_interfaces::msg::Time Tracker::GetTimestamp(struct timeval vrpn_timestamp)
+{
+  if (this->use_vrpn_timestamps_) {
+    builtin_interfaces::msg::Time stamp;
+    stamp.sec = vrpn_timestamp.tv_sec;
+    stamp.nanosec = vrpn_timestamp.tv_usec * 1000;
+
+    return stamp;
+  }
+  return this->get_clock()->now();
+}
+
 void VRPN_CALLBACK Tracker::HandlePose(void * data, const vrpn_TRACKERCB tracker_pose)
 {
   Tracker * tracker = static_cast<Tracker *>(data);
@@ -107,7 +121,7 @@ void VRPN_CALLBACK Tracker::HandlePose(void * data, const vrpn_TRACKERCB tracker
   // populate message
   PoseStamped msg;
   msg.header.frame_id = tracker->frame_id_;
-  msg.header.stamp = tracker->get_clock()->now();
+  msg.header.stamp = tracker->GetTimestamp(tracker_pose.msg_time);
 
   msg.pose.position.x = tracker_pose.pos[0];
   msg.pose.position.y = tracker_pose.pos[1];
@@ -132,7 +146,7 @@ void VRPN_CALLBACK Tracker::HandleTwist(void * data, const vrpn_TRACKERVELCB tra
   // populate message
   TwistStamped msg;
   msg.header.frame_id = tracker->frame_id_;
-  msg.header.stamp = tracker->get_clock()->now();
+  msg.header.stamp = tracker->GetTimestamp(tracker_twist.msg_time);
 
   msg.twist.linear.x = tracker_twist.vel[0];
   msg.twist.linear.y = tracker_twist.vel[1];
@@ -161,7 +175,7 @@ void VRPN_CALLBACK Tracker::HandleAccel(void * data, const vrpn_TRACKERACCCB tra
   // populate message
   AccelStamped msg;
   msg.header.frame_id = tracker->frame_id_;
-  msg.header.stamp = tracker->get_clock()->now();
+  msg.header.stamp = tracker->GetTimestamp(tracker_accel.msg_time);
 
   msg.accel.linear.x = tracker_accel.acc[0];
   msg.accel.linear.y = tracker_accel.acc[1];

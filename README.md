@@ -55,6 +55,7 @@ file with custom configurations.
   system default QoS which is reliable (default: `true`)
 - `multi_sensor (bool)` -- set to true if there are more than one sensor (frame) reporting on
   the same object (default: `false`)
+- `use_vrpn_timestamps (bool)` -- use timestamps coming from VRPN. This ensures that the interval between frames timestamps is not modified (default: `false`)
 
 ### Acknowledgement
 Some ideas are borrowed from the well known
