@@ -26,11 +26,11 @@ supported hardware can be found on
 #### Launch Default Configuration from Command Line
 Run the following command,
 ```bash
-ros2 launch client.launch.yaml server:=<server ip> port:=<port>
+ros2 launch vrpn_mocap client.launch.yaml server:=<server ip> port:=<port>
 ```
 replacing `<server ip>` and `<port>` with your VRPN server ip and port, e.g.
 ```bash
-ros2 launch client.launch.yaml server:=192.168.0.4 port:=3883
+ros2 launch vrpn_mocap client.launch.yaml server:=192.168.0.4 port:=3883
 ```
 Then with `ros2 topic list`, you should be able to see the following topics
 ```bash
