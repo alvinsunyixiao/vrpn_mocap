@@ -2,8 +2,8 @@
 Changelog for package vrpn_mocap
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.1.0 (2024-02-07)
+------------------
 * fix readme (`#9 <https://github.com/alvinsunyixiao/vrpn_mocap/issues/9>`_)
 * Add option to use VRPN timestamps rather than generating them again (`#7 <https://github.com/alvinsunyixiao/vrpn_mocap/issues/7>`_)
 * fix duplicate topic name for twist (`#6 <https://github.com/alvinsunyixiao/vrpn_mocap/issues/6>`_)
