@@ -2,6 +2,17 @@
 Changelog for package vrpn_mocap
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* fix readme (`#9 <https://github.com/alvinsunyixiao/vrpn_mocap/issues/9>`_)
+* Add option to use VRPN timestamps rather than generating them again (`#7 <https://github.com/alvinsunyixiao/vrpn_mocap/issues/7>`_)
+* fix duplicate topic name for twist (`#6 <https://github.com/alvinsunyixiao/vrpn_mocap/issues/6>`_)
+  Co-authored-by: stuebema <stueben@isse.de>
+  Co-authored-by: Alvin Sun <alvinsunyixiao@gmail.com>
+* rename different CIs to different job names (`#8 <https://github.com/alvinsunyixiao/vrpn_mocap/issues/8>`_)
+* default to use sensor data qos (`#4 <https://github.com/alvinsunyixiao/vrpn_mocap/issues/4>`_)
+* Contributors: Alvin Sun, mstueben, njacquemin1993
+
 1.0.4 (2023-04-25)
 ------------------
 * fix readme
