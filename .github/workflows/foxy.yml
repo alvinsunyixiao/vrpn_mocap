@@ -1,4 +1,4 @@
-name: foxy build
+name: foxy build (EOL)
 
 on:
   push:
