@@ -1,4 +1,4 @@
-name: rolling build
+name: jazzy build
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  rolling_build:
+  jazzy_build:
     runs-on: ubuntu-24.04
     steps:
       - name: cancle preivious run
@@ -19,9 +19,9 @@ jobs:
       - name: setup ROS2
         uses: ros-tooling/setup-ros@0.7.7
         with:
-          required-ros-distributions: rolling
+          required-ros-distributions: jazzy
       - name: ROS2 build and test
         uses: ros-tooling/action-ros-ci@0.3.13
         with:
           package-name: vrpn_mocap
-          target-ros2-distro: rolling
+          target-ros2-distro: jazzy
