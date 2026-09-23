@@ -28,7 +28,10 @@ add_library(vrpn_mocap src/client.cpp src/tracker.cpp)
 target_include_directories(vrpn_mocap PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
-ament_target_dependencies(vrpn_mocap rclcpp VRPN std_msgs geometry_msgs Eigen3)
+ament_target_dependencies(vrpn_mocap rclcpp VRPN std_msgs geometry_msgs)
+# Eigen 5 only exports the Eigen3::Eigen target (no EIGEN3_INCLUDE_DIRS),
+# which ament_target_dependencies does not pick up, so link it directly.
+target_link_libraries(vrpn_mocap Eigen3::Eigen)
 
 install(TARGETS vrpn_mocap
         DESTINATION lib/${PROJECT_NAME})
