@@ -3,8 +3,6 @@ name: rolling build
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
   workflow_dispatch:
 
@@ -17,7 +15,7 @@ jobs:
         with:
           access_token: ${{ github.token }}
       - name: setup ROS2
-        uses: ros-tooling/setup-ros@0.7.7
+        uses: ros-tooling/setup-ros@v0.7
         with:
           required-ros-distributions: rolling
       - name: ROS2 build and test
