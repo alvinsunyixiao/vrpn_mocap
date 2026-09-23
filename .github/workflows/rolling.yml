@@ -19,7 +19,7 @@ jobs:
         with:
           required-ros-distributions: rolling
       - name: ROS2 build and test
-        uses: ros-tooling/action-ros-ci@0.3.13
+        uses: ros-tooling/action-ros-ci@v0.4
         with:
           package-name: vrpn_mocap
           target-ros2-distro: rolling
