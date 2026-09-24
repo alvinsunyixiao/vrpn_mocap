@@ -1,4 +1,4 @@
-name: rolling build
+name: lyrical build
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  rolling_build:
+  lyrical_build:
     runs-on: ubuntu-26.04
     steps:
       - name: cancle preivious run
@@ -19,9 +19,9 @@ jobs:
       - name: setup ROS2
         uses: ros-tooling/setup-ros@v0.7
         with:
-          required-ros-distributions: rolling
+          required-ros-distributions: lyrical
       - name: ROS2 build and test
         uses: ros-tooling/action-ros-ci@v0.4
         with:
           package-name: vrpn_mocap
-          target-ros2-distro: rolling
+          target-ros2-distro: lyrical
