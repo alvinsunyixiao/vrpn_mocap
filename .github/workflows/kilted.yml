@@ -1,4 +1,4 @@
-name: rolling build
+name: kilted build
 
 on:
   push:
@@ -9,8 +9,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  rolling_build:
-    runs-on: ubuntu-26.04
+  kilted_build:
+    runs-on: ubuntu-24.04
     steps:
       - name: cancle preivious run
         uses: styfle/cancel-workflow-action@0.13.1
@@ -19,9 +19,9 @@ jobs:
       - name: setup ROS2
         uses: ros-tooling/setup-ros@v0.7
         with:
-          required-ros-distributions: rolling
+          required-ros-distributions: kilted
       - name: ROS2 build and test
         uses: ros-tooling/action-ros-ci@v0.4
         with:
           package-name: vrpn_mocap
-          target-ros2-distro: rolling
+          target-ros2-distro: kilted

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.10)
 project(vrpn_mocap)
 
 # Default to C99
@@ -27,11 +27,17 @@ find_package(Eigen3 REQUIRED)
 add_library(vrpn_mocap src/client.cpp src/tracker.cpp)
 target_include_directories(vrpn_mocap PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-  $<INSTALL_INTERFACE:include>)
-ament_target_dependencies(vrpn_mocap rclcpp VRPN std_msgs geometry_msgs)
-# Eigen 5 only exports the Eigen3::Eigen target (no EIGEN3_INCLUDE_DIRS),
-# which ament_target_dependencies does not pick up, so link it directly.
-target_link_libraries(vrpn_mocap Eigen3::Eigen)
+  $<INSTALL_INTERFACE:include>
+  ${VRPN_INCLUDE_DIRS})
+target_compile_definitions(vrpn_mocap PUBLIC ${VRPN_DEFINITIONS})
+# ament_target_dependencies is removed in Lyrical, so link the exported
+# targets directly (available since Humble). VRPN only provides variables.
+target_link_libraries(vrpn_mocap PUBLIC
+  rclcpp::rclcpp
+  ${std_msgs_TARGETS}
+  ${geometry_msgs_TARGETS}
+  Eigen3::Eigen
+  ${VRPN_LIBRARIES})
 
 install(TARGETS vrpn_mocap
         DESTINATION lib/${PROJECT_NAME})
