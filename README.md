@@ -4,7 +4,6 @@
 ![jazzy](https://github.com/alvinsunyixiao/vrpn_mocap/actions/workflows/jazzy.yml/badge.svg)
 ![iron](https://github.com/alvinsunyixiao/vrpn_mocap/actions/workflows/iron.yml/badge.svg)
 ![humble](https://github.com/alvinsunyixiao/vrpn_mocap/actions/workflows/humble.yml/badge.svg)
-![foxy](https://github.com/alvinsunyixiao/vrpn_mocap/actions/workflows/foxy.yml/badge.svg)
 
 ROS2 [VRPN](https://github.com/vrpn/vrpn) client built pirmarily to interface
 with motion capture devices such as VICON and OptiTrack. A detailed list of
