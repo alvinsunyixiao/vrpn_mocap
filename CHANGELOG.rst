@@ -2,8 +2,8 @@
 Changelog for package vrpn_mocap
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.2.0 (2026-09-24)
+------------------
 * [CI] Replace cancel action with concurrency (`#24 <https://github.com/alvinsunyixiao/vrpn_mocap/issues/24>`_)
 * [CI] Use container instead of setup-ros action (`#26 <https://github.com/alvinsunyixiao/vrpn_mocap/issues/26>`_)
 * [CI] Add new CI for lyrical, kilted (`#23 <https://github.com/alvinsunyixiao/vrpn_mocap/issues/23>`_)
