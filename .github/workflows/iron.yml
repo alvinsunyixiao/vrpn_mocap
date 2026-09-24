@@ -8,21 +8,14 @@ on:
 
 jobs:
   iron_build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
+    container:
+      image: rostooling/setup-ros-docker:ubuntu-jammy-ros-iron-ros-base-latest
     steps:
       - name: cancle preivious run
         uses: styfle/cancel-workflow-action@0.10.0
         with:
           access_token: ${{ github.token }}
-      # downgrade cmake necessary because of https://github.com/vrpn/vrpn/pull/276
-      - name: Setup cmake
-        uses: jwlawson/actions-setup-cmake@v1.12
-        with:
-          cmake-version: '3.22.x'
-      - name: setup ROS2
-        uses: ros-tooling/setup-ros@v0.7
-        with:
-          required-ros-distributions: iron
       - name: ROS2 build and test
         uses: ros-tooling/action-ros-ci@v0.3
         with:
